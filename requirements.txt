@@ -24,7 +24,7 @@ inflect
 
 # Tokenization
 jieba
-# piper-phonemize wheels are published for Python 3.10-3.12 only
-piper-phonemize; python_version >= "3.10" and python_version < "3.13"
+# piper_phonemize wheels are published for Python 3.10-3.12 only
+piper_phonemize; python_version >= "3.10" and python_version < "3.13"
 pypinyin
 setuptools<81

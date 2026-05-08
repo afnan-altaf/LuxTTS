@@ -14,7 +14,7 @@ dependencies = [
   "librosa",
   "numpy",
   "onnxruntime",
-  "piper-phonemize",
+  "piper_phonemize",
   "python-multipart",
   "pydub",
   "pypinyin",

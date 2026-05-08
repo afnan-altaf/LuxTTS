@@ -50,7 +50,7 @@ except Exception as ex:
         f"Detected Python {sys.version_info.major}.{sys.version_info.minor}. "
         f"{version_hint}\n"
         "Then run:\n"
-        "pip install piper-phonemize -f "
+        "pip install piper_phonemize -f "
         "https://k2-fsa.github.io/icefall/piper_phonemize.html"
     )
 
