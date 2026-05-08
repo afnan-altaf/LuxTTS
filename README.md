@@ -31,6 +31,7 @@ You can try it locally, colab, or spaces.
 [![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/resolve/main/open-in-hf-spaces-sm.svg)](https://huggingface.co/spaces/YatharthS/LuxTTS)
 
 #### Simple installation:
+Python 3.10-3.12 is required (piper-phonemize wheels are not yet available for Python 3.13+).
 ```
 git clone https://github.com/Afnan-Altaf/LuxTTS.git
 cd LuxTTS

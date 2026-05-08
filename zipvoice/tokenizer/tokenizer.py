@@ -17,6 +17,7 @@
 # limitations under the License.
 
 import logging
+import sys
 import re
 from abc import ABC, abstractmethod
 from functools import reduce
@@ -33,9 +34,12 @@ try:
     from piper_phonemize import phonemize_espeak
 except Exception as ex:
     raise RuntimeError(
-        f"{ex}\nPlease run\n"
-        "pip install piper_phonemize -f \
-            https://k2-fsa.github.io/icefall/piper_phonemize.html"
+        f"{ex}\n"
+        "piper-phonemize wheels are published for Python 3.10-3.12 only.\n"
+        f"Detected Python {sys.version_info.major}.{sys.version_info.minor}; "
+        "please use Python 3.10-3.12 and run:\n"
+        "pip install piper-phonemize -f "
+        "https://k2-fsa.github.io/icefall/piper_phonemize.html"
     )
 
 jieba.default_logger.setLevel(logging.INFO)
