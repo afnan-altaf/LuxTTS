@@ -25,7 +25,7 @@ from zipvoice.utils.infer import rms_norm
 from dataclasses import dataclass, field
 from typing import Optional, List
 
-from linacodec.vocoder.vocos import Vocos
+from vocos import Vocos
 from zipvoice.onnx_modeling import OnnxModel
 from torch.nn.utils import parametrize
 
