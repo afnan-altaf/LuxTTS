@@ -35,13 +35,13 @@ try:
 except Exception as ex:
     python_version = (sys.version_info.major, sys.version_info.minor)
     if python_version >= (3, 13):
-        version_hint = "If you are on Python 3.13+, please switch to Python 3.10-3.12."
+        version_hint = "Python 3.13+ is not supported. Please switch to Python 3.10-3.12."
     elif python_version < (3, 10):
-        version_hint = "If you are on Python 3.9 or earlier, please upgrade to Python 3.10-3.12."
+        version_hint = "Python 3.9 or earlier is not supported. Please upgrade to Python 3.10-3.12."
     else:
         version_hint = (
-            "If you are on Python 3.10-3.12, ensure you can access the wheel index and "
-            "that your platform is supported."
+            "Python 3.10-3.12 detected. Ensure you can access the wheel index and that your "
+            "platform is supported."
         )
     raise RuntimeError(
         f"{ex}\n"
