@@ -10,7 +10,6 @@ tensorboard
 vocos
 pydub
 onnxruntime
-linacodec
 librosa
 transformers<=4.57.6
 
