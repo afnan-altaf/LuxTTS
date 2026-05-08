@@ -36,8 +36,9 @@ except Exception as ex:
     raise RuntimeError(
         f"{ex}\n"
         "piper-phonemize wheels are published for Python 3.10-3.12 only.\n"
-        f"Detected Python {sys.version_info.major}.{sys.version_info.minor}; "
-        "please use Python 3.10-3.12 and run:\n"
+        f"Detected Python {sys.version_info.major}.{sys.version_info.minor}. "
+        "If you are on Python 3.13+, please switch to Python 3.10-3.12.\n"
+        "Then run:\n"
         "pip install piper-phonemize -f "
         "https://k2-fsa.github.io/icefall/piper_phonemize.html"
     )

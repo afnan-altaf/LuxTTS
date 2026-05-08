@@ -1,4 +1,4 @@
-# Requires Python >=3.10,<3.13 (piper-phonemize wheels are published up to 3.12)
+# Requires Python >=3.10,<3.13 (piper-phonemize wheels are published for 3.10-3.12 only)
 --find-links https://k2-fsa.github.io/icefall/piper_phonemize.html
 
 torch
