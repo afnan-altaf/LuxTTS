@@ -46,7 +46,7 @@ except Exception as ex:
         )
     raise RuntimeError(
         f"{ex}\n"
-        "piper-phonemize wheels are published for Python 3.10-3.12 only.\n"
+        "piper_phonemize wheels are published for Python 3.10-3.12 only.\n"
         f"Detected Python {sys.version_info.major}.{sys.version_info.minor}. "
         f"{version_hint}\n"
         "Then run:\n"
