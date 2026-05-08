@@ -90,6 +90,8 @@ form.addEventListener("submit", async (event) => {
 const panel = document.querySelector(".panel");
 let targetX = 0;
 let targetY = 0;
+let lastX = 0;
+let lastY = 0;
 
 document.addEventListener("mousemove", (event) => {
   const { innerWidth, innerHeight } = window;
@@ -100,7 +102,11 @@ document.addEventListener("mousemove", (event) => {
 });
 
 const animatePanel = () => {
-  panel.style.transform = `perspective(1200px) rotateX(${targetY}deg) rotateY(${targetX}deg)`;
+  if (Math.abs(lastX - targetX) > 0.02 || Math.abs(lastY - targetY) > 0.02) {
+    panel.style.transform = `perspective(1200px) rotateX(${targetY}deg) rotateY(${targetX}deg)`;
+    lastX = targetX;
+    lastY = targetY;
+  }
   requestAnimationFrame(animatePanel);
 };
 

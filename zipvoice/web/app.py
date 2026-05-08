@@ -1,4 +1,5 @@
 import io
+import logging
 import os
 import tempfile
 import wave
@@ -15,6 +16,9 @@ from zipvoice.luxvoice import LuxTTS
 APP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = APP_DIR / "static"
 SAMPLE_RATE = 48_000
+ALLOWED_EXTENSIONS = {".wav", ".mp3", ".flac", ".ogg", ".m4a"}
+
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app_instance: FastAPI):
@@ -30,7 +34,11 @@ def _load_model() -> LuxTTS:
     model_id = os.getenv("LUXTTS_MODEL", "YatharthS/LuxTTS")
     device = os.getenv("LUXTTS_DEVICE", "cuda")
     threads = int(os.getenv("LUXTTS_THREADS", "4"))
-    return LuxTTS(model_id, device=device, threads=threads)
+    try:
+        return LuxTTS(model_id, device=device, threads=threads)
+    except Exception as exc:
+        logger.exception("Failed to load LuxTTS model.")
+        raise RuntimeError("Failed to load LuxTTS model. Check configuration and logs.") from exc
 
 
 def _to_wav_bytes(samples: np.ndarray, sample_rate: int) -> bytes:
@@ -98,7 +106,9 @@ async def generate_audio(
             detail="LuxTTS model is not loaded. Check server logs and configuration.",
         )
 
-    suffix = Path(prompt_audio.filename or "").suffix or ".wav"
+    suffix = Path(prompt_audio.filename or "").suffix.lower()
+    if suffix not in ALLOWED_EXTENSIONS:
+        suffix = ".wav"
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as temp_file:
         temp_file.write(audio_bytes)
         temp_path = temp_file.name
@@ -120,7 +130,11 @@ async def generate_audio(
         )
         wav_bytes = _to_wav_bytes(final_wav.squeeze().cpu().numpy(), SAMPLE_RATE)
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=str(exc)) from exc
+        logger.exception("Speech generation failed.")
+        raise HTTPException(
+            status_code=500,
+            detail="Speech generation failed. Check server logs for details.",
+        ) from exc
     finally:
         os.unlink(temp_path)
 
