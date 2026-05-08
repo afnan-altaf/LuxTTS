@@ -88,6 +88,9 @@ form.addEventListener("submit", async (event) => {
 });
 
 const panel = document.querySelector(".panel");
+const CENTER_OFFSET = 0.5;
+const TILT_MULTIPLIER = 6;
+const ANIMATION_THRESHOLD = 0.02;
 let targetX = 0;
 let targetY = 0;
 let lastX = 0;
@@ -95,14 +98,17 @@ let lastY = 0;
 
 document.addEventListener("mousemove", (event) => {
   const { innerWidth, innerHeight } = window;
-  const offsetX = (event.clientX / innerWidth - 0.5) * 6;
-  const offsetY = (event.clientY / innerHeight - 0.5) * -6;
+  const offsetX = (event.clientX / innerWidth - CENTER_OFFSET) * TILT_MULTIPLIER;
+  const offsetY = (event.clientY / innerHeight - CENTER_OFFSET) * -TILT_MULTIPLIER;
   targetX = offsetX;
   targetY = offsetY;
 });
 
 const animatePanel = () => {
-  if (Math.abs(lastX - targetX) > 0.02 || Math.abs(lastY - targetY) > 0.02) {
+  if (
+    Math.abs(lastX - targetX) > ANIMATION_THRESHOLD ||
+    Math.abs(lastY - targetY) > ANIMATION_THRESHOLD
+  ) {
     panel.style.transform = `perspective(1200px) rotateX(${targetY}deg) rotateY(${targetX}deg)`;
     lastX = targetX;
     lastY = targetY;

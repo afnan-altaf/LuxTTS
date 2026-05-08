@@ -102,8 +102,11 @@ async def generate_audio(
     lux_tts = getattr(app.state, "lux_tts", None)
     if lux_tts is None:
         raise HTTPException(
-            status_code=503,
-            detail="LuxTTS model is not loaded. Check server logs and configuration.",
+            status_code=500,
+            detail=(
+                "LuxTTS model is not loaded. Ensure LUXTTS_MODEL and LUXTTS_DEVICE are "
+                "configured correctly, then restart the server."
+            ),
         )
 
     suffix = Path(prompt_audio.filename or "").suffix.lower()
@@ -128,7 +131,7 @@ async def generate_audio(
             speed=speed,
             return_smooth=return_smooth,
         )
-        wav_bytes = _to_wav_bytes(final_wav.squeeze().cpu().numpy(), SAMPLE_RATE)
+        wav_bytes = _to_wav_bytes(final_wav.squeeze().detach().cpu().numpy(), SAMPLE_RATE)
     except Exception as exc:
         logger.exception("Speech generation failed.")
         raise HTTPException(
@@ -138,7 +141,7 @@ async def generate_audio(
     finally:
         os.unlink(temp_path)
 
-    headers = {"Content-Disposition": "inline; filename=lux-tts.wav"}
+    headers = {"Content-Disposition": "inline; filename=jambertech-luxtts.wav"}
     return Response(content=wav_bytes, media_type="audio/wav", headers=headers)
 
 
