@@ -47,6 +47,8 @@ Then open http://127.0.0.1:8000 in your browser and upload a prompt audio file t
 Optional environment variables:
 - `LUXTTS_DEVICE` (default: `cuda`)
 - `LUXTTS_MODEL` (default: `YatharthS/LuxTTS`)
+- `LUXTTS_HOST` (default: `127.0.0.1`)
+- `LUXTTS_PORT` (default: `8000`)
 - `LUXTTS_THREADS` (default: `4`)
 
 #### Load model:

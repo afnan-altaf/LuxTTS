@@ -2,6 +2,7 @@ import io
 import os
 import tempfile
 import wave
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 import numpy as np
@@ -15,7 +16,13 @@ APP_DIR = Path(__file__).resolve().parent
 STATIC_DIR = APP_DIR / "static"
 SAMPLE_RATE = 48_000
 
-app = FastAPI(title="JamberTech Official LuxTTS Studio")
+@asynccontextmanager
+async def lifespan(app_instance: FastAPI):
+    app_instance.state.lux_tts = _load_model()
+    yield
+
+
+app = FastAPI(title="JamberTech Official LuxTTS Studio", lifespan=lifespan)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
@@ -51,11 +58,6 @@ def _to_wav_bytes(samples: np.ndarray, sample_rate: int) -> bytes:
         wav_file.setframerate(sample_rate)
         wav_file.writeframes(pcm.tobytes())
     return buffer.getvalue()
-
-
-@app.on_event("startup")
-def _startup() -> None:
-    app.state.lux_tts = _load_model()
 
 
 @app.get("/")
@@ -123,4 +125,6 @@ async def generate_audio(
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("zipvoice.web.app:app", host="127.0.0.1", port=8000)
+    host = os.getenv("LUXTTS_HOST", "127.0.0.1")
+    port = int(os.getenv("LUXTTS_PORT", "8000"))
+    uvicorn.run("zipvoice.web.app:app", host=host, port=port)
