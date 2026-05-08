@@ -91,13 +91,19 @@ async def generate_audio(
     if not audio_bytes:
         raise HTTPException(status_code=400, detail="Prompt audio is required.")
 
+    lux_tts = getattr(app.state, "lux_tts", None)
+    if lux_tts is None:
+        raise HTTPException(
+            status_code=503,
+            detail="LuxTTS model is not loaded. Check server logs and configuration.",
+        )
+
     suffix = Path(prompt_audio.filename or "").suffix or ".wav"
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as temp_file:
         temp_file.write(audio_bytes)
         temp_path = temp_file.name
 
     try:
-        lux_tts = app.state.lux_tts
         encode_dict = lux_tts.encode_prompt(
             temp_path,
             duration=prompt_duration,
@@ -127,4 +133,5 @@ if __name__ == "__main__":
 
     host = os.getenv("LUXTTS_HOST", "127.0.0.1")
     port = int(os.getenv("LUXTTS_PORT", "8000"))
-    uvicorn.run("zipvoice.web.app:app", host=host, port=port)
+    reload = os.getenv("LUXTTS_RELOAD", "false").lower() == "true"
+    uvicorn.run("zipvoice.web.app:app", host=host, port=port, reload=reload)

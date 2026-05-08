@@ -49,6 +49,7 @@ Optional environment variables:
 - `LUXTTS_MODEL` (default: `YatharthS/LuxTTS`)
 - `LUXTTS_HOST` (default: `127.0.0.1`)
 - `LUXTTS_PORT` (default: `8000`)
+- `LUXTTS_RELOAD` (default: `false`)
 - `LUXTTS_THREADS` (default: `4`)
 
 #### Load model:
