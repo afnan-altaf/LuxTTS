@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JamberTech Official · LuxTTS 3D Studio</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="scene">
+      <div class="scene__grid"></div>
+      <div class="scene__glow"></div>
+      <div class="scene__orb"></div>
+    </div>
+
+    <header class="brand">
+      <div class="brand__badge">JamberTech Official</div>
+      <div class="brand__title">LuxTTS 3D Voice Studio</div>
+      <p class="brand__subtitle">Generate cinematic voice clones directly in your browser.</p>
+    </header>
+
+    <main class="panel">
+      <section class="panel__column">
+        <h2 class="panel__heading">Create Speech</h2>
+        <form id="tts-form" class="form">
+          <label class="form__label" for="prompt-audio">Prompt audio</label>
+          <input id="prompt-audio" class="form__input" type="file" accept="audio/*" required />
+
+          <label class="form__label" for="tts-text">Text to speak</label>
+          <textarea
+            id="tts-text"
+            class="form__textarea"
+            rows="6"
+            placeholder="Type the script you want LuxTTS to speak..."
+            required
+          ></textarea>
+
+          <div class="form__actions">
+            <button id="generate-btn" class="form__button" type="submit">Generate Voice</button>
+            <p id="status" class="form__status">Ready.</p>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel__column panel__column--right">
+        <h2 class="panel__heading">Tuning Controls</h2>
+        <div class="controls">
+          <div class="control">
+            <div class="control__header">
+              <label for="rms">RMS</label>
+              <span id="rms-value" class="control__value"></span>
+            </div>
+            <input id="rms" type="range" min="0.001" max="0.05" step="0.001" value="0.01" />
+          </div>
+          <div class="control">
+            <div class="control__header">
+              <label for="prompt-duration">Prompt duration (sec)</label>
+              <span id="prompt-duration-value" class="control__value"></span>
+            </div>
+            <input id="prompt-duration" type="range" min="2" max="12" step="1" value="5" />
+          </div>
+          <div class="control">
+            <div class="control__header">
+              <label for="num-steps">Sampling steps</label>
+              <span id="num-steps-value" class="control__value"></span>
+            </div>
+            <input id="num-steps" type="range" min="3" max="8" step="1" value="4" />
+          </div>
+          <div class="control">
+            <div class="control__header">
+              <label for="guidance-scale">Guidance scale</label>
+              <span id="guidance-scale-value" class="control__value"></span>
+            </div>
+            <input id="guidance-scale" type="range" min="1" max="6" step="0.1" value="3" />
+          </div>
+          <div class="control">
+            <div class="control__header">
+              <label for="t-shift">T shift</label>
+              <span id="t-shift-value" class="control__value"></span>
+            </div>
+            <input id="t-shift" type="range" min="0.3" max="1.2" step="0.05" value="0.9" />
+          </div>
+          <div class="control">
+            <div class="control__header">
+              <label for="speed">Speed</label>
+              <span id="speed-value" class="control__value"></span>
+            </div>
+            <input id="speed" type="range" min="0.6" max="1.4" step="0.05" value="1.0" />
+          </div>
+          <label class="control__toggle">
+            <input id="return-smooth" type="checkbox" />
+            <span>Smooth output</span>
+          </label>
+        </div>
+
+        <div class="output">
+          <h3 class="output__title">Generated audio</h3>
+          <audio id="audio-player" controls></audio>
+          <a id="download-link" class="output__download" download>Download WAV</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Powered by LuxTTS • JamberTech Official</span>
+      <span>Localhost-ready GUI</span>
+    </footer>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

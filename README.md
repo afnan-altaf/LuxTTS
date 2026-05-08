@@ -37,6 +37,18 @@ cd LuxTTS
 pip install -r requirements.txt
 ```
 
+#### JamberTech Official Web GUI (local host)
+Run a 3D-styled browser UI for LuxTTS on your machine:
+```
+python -m zipvoice.web.app
+```
+Then open http://127.0.0.1:8000 in your browser and upload a prompt audio file to synthesize speech.
+
+Optional environment variables:
+- `LUXTTS_DEVICE` (default: `cuda`)
+- `LUXTTS_MODEL` (default: `YatharthS/LuxTTS`)
+- `LUXTTS_THREADS` (default: `4`)
+
 #### Load model:
 ```python
 from zipvoice.luxvoice import LuxTTS

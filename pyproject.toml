@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
   "cn2an",
+  "fastapi",
   "huggingface-hub",
   "inflect",
   "jieba",
@@ -15,6 +16,7 @@ dependencies = [
   "numpy",
   "onnxruntime",
   "piper-phonemize",
+  "python-multipart",
   "pydub",
   "pypinyin",
   "safetensors",
@@ -23,6 +25,7 @@ dependencies = [
   "torch",
   "torchaudio",
   "transformers<=4.57.6",
+  "uvicorn",
   "vocos",
 ]
 
