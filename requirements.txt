@@ -1,4 +1,3 @@
-# Requires Python >=3.10,<3.13 (piper-phonemize wheels are published for 3.10-3.12 only)
 --find-links https://k2-fsa.github.io/icefall/piper_phonemize.html
 
 torch
@@ -25,6 +24,7 @@ inflect
 
 # Tokenization
 jieba
+# piper-phonemize wheels are published for Python 3.10-3.12 only
 piper-phonemize; python_version >= "3.10" and python_version < "3.13"
 pypinyin
 setuptools<81

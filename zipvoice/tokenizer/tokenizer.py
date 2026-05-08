@@ -40,8 +40,9 @@ except Exception as ex:
         version_hint = "Python 3.9 or earlier is not supported. Please upgrade to Python 3.10-3.12."
     else:
         version_hint = (
-            "Python 3.10-3.12 detected. Ensure you can access the wheel index and that your "
-            "platform is supported."
+            "Python 3.10-3.12 detected. Ensure you can access the wheel index at "
+            "https://k2-fsa.github.io/icefall/piper_phonemize.html and that your platform "
+            "is supported."
         )
     raise RuntimeError(
         f"{ex}\n"
