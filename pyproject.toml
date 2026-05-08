@@ -45,7 +45,7 @@ line-length = 120
 find-links = ["https://k2-fsa.github.io/icefall/piper_phonemize.html"]
 
 [tool.uv.sources]
-linacodec = { git = "https://github.com/ysharma3501/LinaCodec.git" }
+linacodec = { git = "https://github.com/Afnan-Altaf/LinaCodec.git" }
 
 [tool.uv.build-backend]
 module-root = "" # The root module of the project

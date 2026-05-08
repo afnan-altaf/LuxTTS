@@ -32,7 +32,7 @@ You can try it locally, colab, or spaces.
 
 #### Simple installation:
 ```
-git clone https://github.com/ysharma3501/LuxTTS.git
+git clone https://github.com/Afnan-Altaf/LuxTTS.git
 cd LuxTTS
 pip install -r requirements.txt
 ```
