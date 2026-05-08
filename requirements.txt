@@ -10,7 +10,7 @@ tensorboard
 vocos
 pydub
 onnxruntime
-git+https://github.com/Afnan-Altaf/LinaCodec.git
+linacodec
 librosa
 transformers<=4.57.6
 
