@@ -25,6 +25,6 @@ inflect
 
 # Tokenization
 jieba
-piper-phonemize; python_version < "3.13"
+piper-phonemize; python_version >= "3.10" and python_version < "3.13"
 pypinyin
 setuptools<81

@@ -33,11 +33,21 @@ from zipvoice.tokenizer.normalizer import ChineseTextNormalizer, EnglishTextNorm
 try:
     from piper_phonemize import phonemize_espeak
 except Exception as ex:
+    python_version = (sys.version_info.major, sys.version_info.minor)
+    if python_version >= (3, 13):
+        version_hint = "If you are on Python 3.13+, please switch to Python 3.10-3.12."
+    elif python_version < (3, 10):
+        version_hint = "If you are on Python 3.9 or earlier, please upgrade to Python 3.10-3.12."
+    else:
+        version_hint = (
+            "If you are on Python 3.10-3.12, ensure you can access the wheel index and "
+            "that your platform is supported."
+        )
     raise RuntimeError(
         f"{ex}\n"
         "piper-phonemize wheels are published for Python 3.10-3.12 only.\n"
         f"Detected Python {sys.version_info.major}.{sys.version_info.minor}. "
-        "If you are on Python 3.13+, please switch to Python 3.10-3.12.\n"
+        f"{version_hint}\n"
         "Then run:\n"
         "pip install piper-phonemize -f "
         "https://k2-fsa.github.io/icefall/piper_phonemize.html"
